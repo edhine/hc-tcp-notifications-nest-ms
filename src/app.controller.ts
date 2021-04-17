@@ -1,12 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
-import { EventPattern } from '@nestjs/microservices';
+import { EventPattern, MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor() {}
+  constructor() { }
 
   @EventPattern('message_printed')
-  async handleMessagePrinted(data: Record<string, unknown>) {
-    console.log(data.text); 
+  async handleMessagePrintedEvent(data: Record<string, unknown>) {
+    console.log('Event:', data.text);
+  }
+
+
+  @MessagePattern({ cmd: 'send' })
+  async handleMessagePrintedSend(data: Record<string, unknown>) {
+    console.log('Send:', data.text);
+    return data.text;
+    // return (data || []).reduce((a, b) => a + b);
   }
 }
