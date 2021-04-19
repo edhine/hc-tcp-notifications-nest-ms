@@ -28,4 +28,4 @@ WORKDIR /home/node
 COPY --from=builder /home/node/package*.json /home/node/
 COPY --from=builder /home/node/dist/ /home/node/dist/
 RUN npm ci
-CMD ["node", "dist/server.js"]
+RUN npm run start:prod
