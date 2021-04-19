@@ -1,0 +1,50 @@
+on: push
+name: deploy
+jobs:
+  build-and-push:
+    name: build and push image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: build and push to docker
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: ${{ github.repository }}
+        tag_with_ref: true
+        tag_with_sha: true
+        tags: ${{ github.sha }}
+  deploy-to-cluster:
+    name: deploy to cluster
+    runs-on: ubuntu-latest
+    env:
+      KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+    needs: build-and-push
+    steps:
+    - uses: actions/checkout@master
+    - name: deploy to cluster
+      uses: yokawasa/action-setup-kube-tools@v0.4.0
+      with:
+        kubectl: '1.20.2'
+        kustomize: '3.7.0'
+    - name: kubectl
+      id: kubectl
+      run: |
+        mkdir -p ~/.kube/
+        echo $KUBE_CONFIG_DATA | base64 -d > ~/.kube/config
+        cd .kustomize
+        kustomize edit set image input_image=${{ github.repository }}:${{ github.sha }}
+        kustomize build . | kubectl apply -f -
+    #     kubectl -n c rollout status deployment/client-service-web-v1
+    #     URL=`kubectl -n ${{ github.ref }} get ngrok -o=custom-columns='DATA:status.url' | tail -n1`
+    #     while [[ $URL != *"ngrok"* ]]; do
+    #       echo "Still not ready" && sleep 5
+    #     done
+    #     echo "::set-output name=url::$URL"
+    # - name: Add Ngrok URL comment to PR
+    #   uses: unsplash/comment-on-pr@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.WRITE_NGROK_PR }}
+    #   with:
+    #     msg: "URL for enviDronment is: ${{ steps.kubectl.outputs.url }}"
