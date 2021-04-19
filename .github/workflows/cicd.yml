@@ -35,4 +35,4 @@ jobs:
         echo $KUBE_CONFIG_DATA | base64 -d > ~/.kube/config
         cd .kustomize
         kustomize edit set image input_image=${{ github.repository }}:${{ github.sha }}
-        kustomize build . | kubectl apply -f
+        kustomize build . | kubectl apply -f .
