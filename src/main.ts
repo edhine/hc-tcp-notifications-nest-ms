@@ -11,7 +11,7 @@ async function bootstrap() {
     {
       options: {
         // host: '0.0.0.0',
-        port 
+        port
       },
       transport: Transport.TCP
     },
