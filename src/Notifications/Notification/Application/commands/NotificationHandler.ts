@@ -1,5 +1,5 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';;
-import { NotificationCommand } from '../../Domain/Notification.command';
+import { NotificationCommand } from '../../Domain/NotificationCommand';
 import { SlackRepository } from '../../../Slack/Infrastructure/slack.repository';
 import { LoggerCustom } from '../../../Shared/Infrastructure/LoggerCustom';
 

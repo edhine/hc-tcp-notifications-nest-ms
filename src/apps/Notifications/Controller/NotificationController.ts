@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { EventPattern, MessagePattern } from '@nestjs/microservices';
-import { NotificationCommand } from '../../../Notifications/Notification/Domain/Notification.command';
+import { NotificationCommand } from '../../../Notifications/Notification/Domain/NotificationCommand';
 import { LoggerCustom } from '../../../Notifications/Shared/Infrastructure/LoggerCustom';
 
 @Controller()
