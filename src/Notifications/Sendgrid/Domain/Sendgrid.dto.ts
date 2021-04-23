@@ -1,6 +1,8 @@
+import { IntersectionType } from "@nestjs/mapped-types";
 import { IsOptional, IsString } from "class-validator";
+import { NotificationCommand } from "../../Notification/Domain/NotificationCommand";
 
-export class SendgridDTO {
+class AdditionalSendgridDTO {
     
     @IsString()
     readonly from!: string;
@@ -11,12 +13,10 @@ export class SendgridDTO {
 
     @IsString()
     readonly to!: string;
-
-    @IsString()
-    readonly text!: string;
-
-    @IsString()
-    readonly title!: string;
-
     
 }
+
+export class SendgridDTO extends IntersectionType(
+    NotificationCommand,
+    AdditionalSendgridDTO
+) {}

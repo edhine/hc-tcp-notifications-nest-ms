@@ -1,7 +1,4 @@
-import { ClientResponse } from '@sendgrid/client/src/response';
-import { ResponseError } from '@sendgrid/helpers/classes';
-import { MailData, MailContent } from '@sendgrid/helpers/classes/mail';
-import { MailDataRequired, MailService } from '@sendgrid/mail';
+import { MailService } from '@sendgrid/mail';
 import { ConfigService } from '@nestjs/config';
 import { LoggerCustom } from '../../Shared/Infrastructure/LoggerCustom';
 import { Injectable } from '@nestjs/common';

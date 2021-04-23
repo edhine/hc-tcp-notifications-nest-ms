@@ -9,8 +9,4 @@ export class Sendgrid extends AggregateRoot {
     set sendgridData(in_sendgrid_data) {
         this._sendgrid_data = in_sendgrid_data;
     }
-
-    sendEmail() {
-        this.apply(new SendEmailEvent(this._sendgrid_data));
-    }
 }

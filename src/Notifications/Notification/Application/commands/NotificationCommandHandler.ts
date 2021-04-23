@@ -7,7 +7,6 @@ import { SendgridAdapter } from '../../../Sendgrid/Infrastructure/SendgridAdapte
 @CommandHandler(NotificationCommand)
 export class NotificationCommandHandler implements ICommandHandler<NotificationCommand> {
     constructor(
-        private readonly _slackRepository: SlackRepository,
         private readonly _sendgridAdapter: SendgridAdapter,
         private readonly _publisher: EventPublisher,
         private readonly _logger: LoggerCustom

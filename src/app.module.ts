@@ -1,4 +1,4 @@
-import { Logger, Module } from '@nestjs/common';
+import { HttpModule, Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
 import { NotificationController } from './apps/Notifications/Controller/NotificationController';
@@ -18,7 +18,9 @@ export const EventHandlers = [SlackSendEventHandler];
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration]
-    })
+    }),
+
+    HttpModule
   ],
   controllers: [NotificationController],
   providers: [
