@@ -17,7 +17,6 @@ export class NotificationController {
   async handleSendNotification(data: Record<string, unknown>) {
     this._logger.debug('handleSendNotification...');
 
-    const id = '312312';
     this._commandBus.execute(new NotificationCommand('Titulo','Text'));
   }
 
