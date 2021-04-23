@@ -4,13 +4,13 @@ import { SlackRepository } from '../../../Slack/Infrastructure/slack.repository'
 import { LoggerCustom } from '../../../Shared/Infrastructure/LoggerCustom';
 
 @CommandHandler(NotificationCommand)
-export class NotificationHandler implements ICommandHandler<NotificationCommand> {
+export class NotificationCommandHandler implements ICommandHandler<NotificationCommand> {
     constructor(
         private readonly _slackRepository: SlackRepository,
         private readonly _publisher: EventPublisher,
         private readonly _logger: LoggerCustom
     ) { 
-        this._logger.setContext(NotificationHandler.name);
+        this._logger.setContext(NotificationCommandHandler.name);
     }
 
     async execute(command: NotificationCommand) {
