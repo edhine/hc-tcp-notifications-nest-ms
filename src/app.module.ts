@@ -7,7 +7,7 @@ import { NotificationCommandHandler } from './Notifications/Notification/Applica
 import { LoggerCustom } from './Notifications/Shared/Infrastructure/LoggerCustom';
 import { SlackSendEventHandler } from './Notifications/Slack/Application/events/slack-send-message-event.handler';
 import { SlackRepository } from './Notifications/Slack/Infrastructure/slack.repository';
-import { SendgridAdapter } from './Notifications/Shared/Infrastructure/channels/SendgridAdapter';
+import { SendgridAdapter } from './Notifications/Sendgrid/Infrastructure/SendgridAdapter';
 
 export const CommandHandlers = [NotificationCommandHandler];
 export const EventHandlers = [SlackSendEventHandler];
@@ -23,11 +23,11 @@ export const EventHandlers = [SlackSendEventHandler];
   controllers: [NotificationController],
   providers: [
     SlackRepository,
+    SendgridAdapter,
     
     ...CommandHandlers,
     ...EventHandlers,
 
-    SendgridAdapter,
 
     LoggerCustom,
   ]
