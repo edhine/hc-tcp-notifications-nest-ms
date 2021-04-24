@@ -1,14 +1,18 @@
+import { IntersectionType } from "@nestjs/mapped-types";
 import { IsString } from "class-validator";
+import { NotificationCommand } from "../../Notification/Domain/NotificationCommand";
 
-export class SlackDTO {
+class AdditionalSlackDTO {
     
     @IsString()
-    readonly id!: string;
-
+    readonly channel!: string;
+    
     @IsString()
-    readonly title!: string;
-
-    @IsString()
-    readonly text!: string;
+    readonly icon_emoji!: string;
     
 }
+
+export class SlackDTO extends IntersectionType(
+    NotificationCommand,
+    AdditionalSlackDTO
+) {}

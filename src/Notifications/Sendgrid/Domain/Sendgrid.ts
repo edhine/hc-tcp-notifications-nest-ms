@@ -1,6 +1,5 @@
 import { AggregateRoot } from "@nestjs/cqrs";
 import { SendgridDTO } from "./Sendgrid.dto";
-import { SendEmailEvent } from "./SendEmailEvent";
 
 export class Sendgrid extends AggregateRoot {
 
